@@ -2,12 +2,11 @@
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddValidation();
-
-var connString = "Data Source=GameStore.db";
-builder.Services.AddSqlite<GameStoreContext>(connString);
+builder.AddGameStoreDb(); // call the new method to add the GameStore database context to the service collection and it is typically called during application startup to configure the database connection and any related services required for data access in the application.
 
 var app = builder.Build();
 app.MapGameEndpoints();  // call refactored method to map endpoints and for better organization of code
