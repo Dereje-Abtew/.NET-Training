@@ -20,6 +20,13 @@ public static class DataExtensions
     public static void AddGameStoreDb(this WebApplicationBuilder builder)
     {
         var connString = builder.Configuration.GetConnectionString("GameStore"); //this "GameStore" is the name of the connection string in appsettings.json
+        //DbContext has a scope services liftime b/c
+        // it insure that a new instance of DbContext is created per request
+        //  kezih lay meten create yaderegnew scope ke dependancy injection gar yeteyayaze new.
+        // group.MapPost("/", (CreateGameDto newGame, GameStoreContext DbContext) => endpoint lay yeseranew malet new
+
+
+        
         builder.Services.AddSqlite<GameStoreContext>(
             connString,
             optionsAction: options => options.UseSeeding((context, _) =>

@@ -11,7 +11,7 @@ public class Game
  // Foreign key property for Genre,  used to connect the Game to its Genre in the database
     public int GenreId { get; set; }
 
-    public decimal price { get; set; }
+    public decimal Price { get; set; }
 
     public DateOnly DateReleased { get; set; }
 }

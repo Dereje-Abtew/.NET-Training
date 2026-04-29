@@ -12,8 +12,8 @@ Content-Type: application/json
 
 {
     "name": "Dereje Abtew",
-    "geners": "Software Engineer",
-    "price": 403.65,
+    "genreId": 3,
+    "price": 40.65,
     "releaseDate": "2026-04-26"
 }
 

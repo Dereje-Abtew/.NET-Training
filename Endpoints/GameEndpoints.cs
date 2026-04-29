@@ -1,5 +1,7 @@
 
+using GameStore.Api.Data;
 using GameStore.Api.Dtos;
+using GameStore.Api.Model;
 
 namespace GameStore.Api.Endpoints;
 
@@ -50,24 +52,33 @@ public static class GameEndpoints
            .WithName(GetGameEndpointName);
 
         // POST /games
-        group.MapPost("/", (CreateGameDto newGame) =>
+        group.MapPost("/", async (CreateGameDto newGame, GameStoreContext dbContext) =>
         {
+            //  for Dependency injection conecpt to add database support for API endpoints, then add class on endpoint that is GameStoreContext
 
+            Game game = new()
+            {
+                Name = newGame.name,
+                GenreId = newGame.GenreId,
+                Price = newGame.Price,
+                DateReleased = newGame.DateReleased
+            };
+            dbContext.Games.Add(game);
+            await dbContext.SaveChangesAsync();//add Async 
 
-            GameDto game = new(
-                games.Count + 1,
-                newGame.name,
-                newGame.Geners,
-                newGame.price,
-                newGame.ReleaseDate
+            GameDetailsDto gameDto = new(
+                game.Id,
+                game.Name,
+                game.GenreId,
+                game.Price,
+                game.DateReleased
 
             );
-            games.Add(game);
-            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
+            return Results.CreatedAtRoute(GetGameEndpointName, new { id = gameDto.Id }, gameDto);
         });
 
         // PUT /games/1
-        group.MapPut("/{id}", (int id, CreateGameDto updatedGame) =>
+        group.MapPut("/{id}", (int id, UpdateGameDto updatedGame) =>
         {
             var index = games.FindIndex(game => game.Id == id);
             if (index == -1) return Results.NotFound();
