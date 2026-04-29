@@ -4,29 +4,29 @@ GET http://localhost:5130/games
 
 ###
 
-GET  http://localhost:5130/games/999
+GET  http://localhost:5130/games/1
 
 ###
 POST http://localhost:5130/games
 Content-Type: application/json
 
 {
-    "name": "Dereje Abtew",
-    "genreId": 3,
-    "price": 40.65,
-    "releaseDate": "2026-04-26"
+    "name": "Lester city FC",
+    "genreId":5,
+    "price":13,
+    "releaseDate": "2026-04-30"
 }
 
 ###
-PUT http://localhost:5130/games/1
+PUT http://localhost:5130/games/2
 Content-Type: application/json
 
 {
-  "name": "",
-  "geners": "Fighting",
-  "price": 6000,
-  "releaseDate": "1991-02-01"
+  "name": "Liverpool FC updated",
+  "genreId": 2,
+  "price": 1.0,
+  "releaseDate": "2026-04-30"
 }
 
 ###
-DELETE http://localhost:5130/games/1
+DELETE http://localhost:5130/games/5

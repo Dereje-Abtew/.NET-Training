@@ -1,6 +1,6 @@
 namespace GameStore.Api.Dtos;
 //  a shared agreement about how data will be tranfered and share.
-public record GameDto(
+public record GameSummaryDto(
     int Id,
     string Name,
     string Genres,
